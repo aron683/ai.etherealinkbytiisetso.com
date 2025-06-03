@@ -2,20 +2,21 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const OpenAI = require('openai');
+const { OpenAI } = require('openai');
 
+// App setup
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🧠 OpenAI setup
+// OpenAI setup
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY
 });
 
-// 🚀 Endpoint
+// Endpoint
 app.post('/ask', async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -27,13 +28,13 @@ app.post('/ask', async (req, res) => {
 
     const answer = completion.choices[0].message.content;
     res.json({ answer });
-
   } catch (error) {
     console.error('OpenAI error:', error.message);
-    res.status(500).json({ error: 'OpenAI request failed' });
+    res.status(500).json({ error: 'Something went wrong' });
   }
 });
 
+// Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
