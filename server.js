@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { OpenAI } = require('openai');
+const OpenAI = require('openai'); // ✅ No destructuring
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,12 +10,12 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🔑 OpenAI setup
+// 🔑 Setup OpenAI correctly
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// 🧠 Endpoint
+// 🧠 Ask endpoint
 app.post('/ask', async (req, res) => {
   try {
     const { prompt } = req.body;
