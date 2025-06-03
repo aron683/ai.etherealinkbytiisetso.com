@@ -10,13 +10,13 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// OpenAI API setup
+// 🔑 OpenAI API setup
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-// POST endpoint
+// 📮 POST endpoint
 app.post('/ask', async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -28,11 +28,12 @@ app.post('/ask', async (req, res) => {
     const answer = completion.data.choices[0].message.content;
     res.json({ answer });
   } catch (error) {
-    console.error('Error fetching from OpenAI:', error.message);
-    res.status(500).json({ error: 'Something went wrong' });
+    console.error('Error fetching OpenAI response:', error.message);
+    res.status(500).json({ error: 'Failed to fetch response' });
   }
 });
 
+// 🚀 Start the server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
