@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
+const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +20,6 @@ const openai = new OpenAIApi(configuration);
 app.post('/ask', async (req, res) => {
   try {
     const { prompt } = req.body;
-
     const completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
@@ -28,7 +27,6 @@ app.post('/ask', async (req, res) => {
 
     const answer = completion.data.choices[0].message.content;
     res.json({ answer });
-
   } catch (error) {
     console.error('OpenAI error:', error.message);
     res.status(500).json({ error: 'Something went wrong' });
