@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -10,32 +9,31 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ OpenAI v3 Setup
+// 🔐 OpenAI setup
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-// 🧠 MindPort Endpoint
+// 🧠 AI Endpoint
 app.post('/ask', async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const prompt = req.body.prompt;
 
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: prompt }],
     });
 
     const answer = completion.data.choices[0].message.content;
     res.json({ answer });
-
   } catch (error) {
-    console.error("OpenAI Error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Something went wrong internally." });
+    console.error('OpenAI error:', error);
+    res.status(500).send('Error generating response');
   }
 });
 
-// 🚀 Start server
+// 🚀 Server start
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
