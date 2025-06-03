@@ -44,11 +44,9 @@
 <body>
   <h1>🧠 Welcome to MindPort AI</h1>
   <p>Ask anything and let AI give you instant answers!</p>
-
   <input type="text" id="input" placeholder="What's on your mind?" />
   <br />
   <button onclick="askMindPort()">Ask</button>
-
   <div id="answer"></div>
 
   <script>
@@ -61,7 +59,7 @@
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ prompt: userInput })
+        body: JSON.stringify({ prompt: userInput }) // ✅ matches backend
       })
       .then(res => res.json())
       .then(data => {
