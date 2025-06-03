@@ -3,75 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindPort AI – Ask Anything</title>
+  <title>MindPort AI</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #0f0f0f, #1f1f1f);
-      color: white;
-      text-align: center;
-      padding: 2em;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
     }
-    input {
-      padding: 12px;
-      width: 60%;
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 1em;
-      font-size: 1em;
+    h1 {
+      color: #00ffcc;
+    }
+    textarea {
+      width: 300px;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
     button {
       padding: 10px 20px;
-      font-size: 1em;
-      background-color: #00c896;
-      color: white;
+      font-size: 16px;
+      background: #00ffcc;
       border: none;
-      border-radius: 8px;
       cursor: pointer;
     }
-    #answer {
-      margin-top: 2em;
-      background-color: #202020;
-      padding: 1em;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,255,200,0.2);
+    .response {
+      margin-top: 20px;
+      padding: 20px;
+      background: #1e1e1e;
+      width: 90%;
+      max-width: 600px;
+      border-left: 4px solid #00ffcc;
     }
   </style>
 </head>
 <body>
-  <h1>🤖 MindPort AI</h1>
-  <p>Ask anything and get instant answers!</p>
+  <h1>MindPort AI</h1>
+  <textarea id="prompt" placeholder="Ask something smart..."></textarea><br>
+  <button onclick="askAI()">Ask</button>
 
-  <input type="text" id="input" placeholder="What’s on your mind?" />
-  <br />
-  <button onclick="askMindPort()">Ask</button>
-
-  <div id="answer"></div>
+  <div class="response" id="responseBox">Waiting for your question...</div>
 
   <script>
-    async function askMindPort() {
-      const userInput = document.getElementById("input").value;
-      if (!userInput.trim()) return alert("Please enter a question");
-
-      document.getElementById("answer").innerText = "⏳ Thinking...";
+    async function askAI() {
+      const prompt = document.getElementById("prompt").value;
+      const responseBox = document.getElementById("responseBox");
+      responseBox.textContent = "Thinking...";
 
       try {
-        const res = await fetch("https://ai-etherealinkbytiisetso-com.onrender.com/ask", {
+        const res = await fetch("https://your-render-app.onrender.com/ask", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: userInput }),
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt })
         });
 
         const data = await res.json();
-
-        if (data.answer) {
-          document.getElementById("answer").innerText = data.answer;
-        } else {
-          throw new Error(data.error || "No answer returned");
-        }
-
+        responseBox.textContent = data.answer || "No answer received.";
       } catch (err) {
-        document.getElementById("answer").innerText = "❌ Error: " + err.message;
+        responseBox.textContent = "Error: Could not contact server.";
       }
     }
   </script>
