@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,30 +10,27 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🔑 OpenAI API setup
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+// OpenAI setup
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
-const openai = new OpenAIApi(configuration);
 
-// 📮 POST endpoint
+// Endpoint
 app.post('/ask', async (req, res) => {
   try {
     const { prompt } = req.body;
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt }],
+      messages: [{ role: 'user', content: prompt }]
     });
-
-    const answer = completion.data.choices[0].message.content;
+    const answer = completion.choices[0].message.content;
     res.json({ answer });
   } catch (error) {
-    console.error('Error fetching OpenAI response:', error.message);
-    res.status(500).json({ error: 'Failed to fetch response' });
+    console.error('OpenAI error:', error.message);
+    res.status(500).json({ error: 'Something went wrong' });
   }
 });
 
-// 🚀 Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
