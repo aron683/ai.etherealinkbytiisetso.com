@@ -7,66 +7,56 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #121212;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
-    }
-    h1 {
-      color: #00ffcc;
-    }
-    textarea {
-      width: 300px;
-      height: 100px;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #00ffcc;
-      border: none;
-      cursor: pointer;
-    }
-    .response {
-      margin-top: 20px;
+      background: #111;
+      color: #0f0;
       padding: 20px;
-      background: #1e1e1e;
-      width: 90%;
-      max-width: 600px;
-      border-left: 4px solid #00ffcc;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      width: 80%;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    #response {
+      margin-top: 20px;
+      background: #222;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
-  <h1>MindPort AI</h1>
-  <textarea id="prompt" placeholder="Ask something smart..."></textarea><br>
+  <h1>🤖 MindPort AI</h1>
+  <p>Ask me anything below:</p>
+
+  <input id="prompt" type="text" placeholder="Type your question here..." />
+  <br />
   <button onclick="askAI()">Ask</button>
 
-  <div class="response" id="responseBox">Waiting for your question...</div>
+  <div id="response"></div>
 
   <script>
     async function askAI() {
-      const prompt = document.getElementById("prompt").value;
-      const responseBox = document.getElementById("responseBox");
-      responseBox.textContent = "Thinking...";
+      const prompt = document.getElementById('prompt').value;
+      const responseBox = document.getElementById('response');
+      responseBox.innerText = 'Thinking...';
 
       try {
-        const res = await fetch("https://your-render-app.onrender.com/ask", {
-          method: "POST",
+        const res = await fetch('/ask', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ prompt })
+          body: JSON.stringify({ prompt }),
         });
 
         const data = await res.json();
-        responseBox.textContent = data.answer || "No answer received.";
+        responseBox.innerText = data.answer;
       } catch (err) {
-        responseBox.textContent = "Error: Could not contact server.";
+        responseBox.innerText = 'Error talking to MindPort AI.';
+        console.error(err);
       }
     }
   </script>
