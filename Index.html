@@ -28,10 +28,10 @@
   </style>
 </head>
 <body>
-  <h1>🤖 MindPort AI</h1>
-  <p>Ask me anything below:</p>
+  <h1>MindPort AI</h1>
+  <p>Ask your question:</p>
 
-  <input id="prompt" type="text" placeholder="Type your question here..." />
+  <input id="prompt" type="text" placeholder="Type here..." />
   <br />
   <button onclick="askAI()">Ask</button>
 
@@ -41,7 +41,7 @@
     async function askAI() {
       const prompt = document.getElementById('prompt').value;
       const responseBox = document.getElementById('response');
-      responseBox.innerText = 'Thinking...';
+      responseBox.innerText = 'Loading...';
 
       try {
         const res = await fetch('/ask', {
@@ -55,8 +55,7 @@
         const data = await res.json();
         responseBox.innerText = data.answer;
       } catch (err) {
-        responseBox.innerText = 'Error talking to MindPort AI.';
-        console.error(err);
+        responseBox.innerText = 'Error contacting AI.';
       }
     }
   </script>
