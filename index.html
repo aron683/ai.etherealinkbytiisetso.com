@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindPort AI - Your Intelligent Assistant</title>
+  <title>MindPort AI - Powered by GPT-4o</title>
   <link rel="icon" href="favicon.png" />
   <style>
     body {
@@ -21,10 +21,6 @@
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
-    header p {
-      font-size: 1.2rem;
-      color: #dcdcdc;
-    }
     .btn {
       margin-top: 1rem;
       padding: 0.75rem 2rem;
@@ -35,65 +31,44 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .section {
-      padding: 3rem 1rem;
-      max-width: 900px;
+    .container {
+      max-width: 800px;
       margin: auto;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .feature-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border-left: 4px solid #1db954;
-    }
-    .feature-card h3 {
-      margin-top: 0;
-    }
-    .pricing {
-      background: #111;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .price-box {
-      background: #1a1a1a;
-      border: 2px solid #1db954;
       padding: 2rem;
-      margin: 1rem auto;
+    }
+    .chat-area {
+      background: #1a1a1a;
       border-radius: 12px;
-      max-width: 350px;
-    }
-    .price-box h2 {
-      color: #1db954;
-    }
-    .email-form {
-      text-align: center;
+      padding: 1.5rem;
       margin-top: 2rem;
     }
-    .email-form input {
-      padding: 0.8rem;
-      width: 60%;
-      border-radius: 30px;
+    input, button {
+      padding: 1rem;
+      border-radius: 8px;
       border: none;
-      margin-right: 0.5rem;
+      font-size: 1rem;
     }
-    .footer {
-      background: #0a0a0a;
-      padding: 2rem;
+    #ask {
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .mic-btn {
+      background: #444;
+      margin-left: 1rem;
+    }
+    #response {
+      margin-top: 1rem;
+      background: #111827;
+      padding: 1rem;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+    footer {
       text-align: center;
+      margin-top: 4rem;
       color: #aaa;
       font-size: 0.9rem;
-    }
-    @media(max-width: 600px) {
-      .email-form input {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
     }
   </style>
 </head>
@@ -101,68 +76,59 @@
 
   <header>
     <h1>MindPort AI</h1>
-    <p>Unlock the full power of artificial intelligence in your daily life.</p>
-    <a href="/dashboard.html"><button class="btn">Launch MindPort</button></a>
+    <p>Powered by GPT-4o • Your daily AI assistant</p>
   </header>
 
-  <section class="section">
-    <h2 style="text-align:center;">What Can MindPort Do?</h2>
-    <div class="features">
-      <div class="feature-card">
-        <h3>Ask Anything</h3>
-        <p>Talk to an AI that understands any language, anytime. Text or voice supported.</p>
+  <div class="container">
+    <div class="chat-area">
+      <label for="ask">Ask Anything:</label>
+      <input type="text" id="ask" placeholder="e.g., What's the weather in Tokyo?" />
+      <div>
+        <button class="btn" onclick="sendPrompt()">Send</button>
+        <button class="btn mic-btn" onclick="startVoice()">🎤 Speak</button>
       </div>
-      <div class="feature-card">
-        <h3>Generate Images</h3>
-        <p>Create visuals from your imagination instantly with our AI image creator.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Code Assistant</h3>
-        <p>Need help with coding? Our premium Code AI can write, explain or debug code for you.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Job Search</h3>
-        <p>Search and browse unlimited job listings globally — updated in real time.</p>
-      </div>
-      <div class="feature-card">
-        <h3>VIP Dashboard</h3>
-        <p>Access premium tools, tips, and your account — all in one place.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Daily AI Tips</h3>
-        <p>Learn a new trick every day. Tips sent via email and displayed on dashboard.</p>
-      </div>
+      <div id="response">🤖 I will reply here...</div>
     </div>
-  </section>
-
-  <section class="pricing">
-    <h2>Upgrade to Premium</h2>
-    <div class="price-box">
-      <h3>MindPort VIP Access</h3>
-      <p>Unlimited access to AI + VIP dashboard</p>
-      <h2>R670 / Month</h2>
-      <button class="btn">Get VIP</button>
-    </div>
-
-    <div class="price-box">
-      <h3>Code AI Unlock</h3>
-      <p>Unlock premium Code AI tool</p>
-      <h2>R1000 (One-time)</h2>
-      <button class="btn">Unlock Now</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 style="text-align:center;">Join Our AI Tribe</h2>
-    <div class="email-form">
-      <input type="email" placeholder="Enter your email to get daily AI tips" />
-      <button class="btn">Subscribe</button>
-    </div>
-  </section>
-
-  <div class="footer">
-    © 2025 MindPort AI — Powered by Ethereal Ink.
   </div>
+
+  <footer>
+    © 2025 MindPort AI • Built with 🔥 by Ethereal Ink
+  </footer>
+
+  <script>
+    async function sendPrompt() {
+      const prompt = document.getElementById("ask").value;
+      const resBox = document.getElementById("response");
+      resBox.innerText = "⏳ Thinking...";
+
+      const response = await fetch("/api/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await response.json();
+      resBox.innerText = data.reply;
+      speakText(data.reply);
+    }
+
+    function startVoice() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.start();
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("ask").value = transcript;
+        sendPrompt();
+      };
+    }
+
+    function speakText(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
 
 </body>
   </html>
