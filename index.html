@@ -1,133 +1,155 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MindPort AI</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0f172a;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
       padding: 1rem;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f1117;
+      color: white;
     }
+
     header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: bold;
     }
-    .email {
-      font-size: 0.9rem;
-      color: #94a3b8;
+
+    .input-area {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
     }
-    .chat-box {
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 600px;
-      background-color: #1e293b;
-      border-radius: 8px;
-      padding: 1rem;
-    }
+
     input, button {
-      padding: 0.75rem;
+      padding: 1rem;
       font-size: 1rem;
+      margin-top: 0.5rem;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
     }
-    input {
-      flex-grow: 1;
-      background-color: #334155;
+
+    #sendBtn {
+      background: #2563eb;
       color: white;
-    }
-    button {
-      background-color: #3b82f6;
-      color: white;
-      margin-left: 0.5rem;
       cursor: pointer;
     }
-    .microphone {
-      background: #0ea5e9;
-      border-radius: 50%;
-      padding: 0.75rem;
-      margin-top: 1rem;
-    }
-    .premium {
-      margin-top: 2rem;
-      background: #1e3a8a;
+
+    #vip {
+      background: #1e1e2e;
       padding: 1rem;
+      margin-top: 2rem;
+      border-left: 5px solid #22c55e;
       border-radius: 8px;
-      text-align: center;
     }
-    .upgrade-btn {
-      background: #22c55e;
+
+    .job-finder {
+      margin-top: 2rem;
+    }
+
+    .job-card {
+      background: #1f2937;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+    }
+
+    .mic {
       margin-top: 0.5rem;
+      background: #4b5563;
     }
-    .tip-box {
-      background: #0f766e;
-      padding: 0.75rem;
-      margin-top: 1.5rem;
-      border-radius: 8px;
-      font-size: 0.95rem;
-    }
-    .vip, .jobs {
-      margin-top: 2rem;
-      background: #475569;
+
+    .response {
+      margin-top: 1rem;
+      background: #111827;
       padding: 1rem;
       border-radius: 8px;
-      width: 100%;
-      max-width: 600px;
     }
-    .vip h3, .jobs h3 {
-      margin-top: 0;
-    }
-    .job-result {
-      margin-top: 1rem;
-      background: #334155;
-      padding: 0.75rem;
-      border-radius: 5px;
+
+    .premium-banner {
+      margin-top: 2rem;
+      background: #111827;
+      padding: 1rem;
+      text-align: center;
+      border-top: 2px solid #2563eb;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">MindPort AI</div>
-    <div class="email">user@example.com</div>
-  </header>  <div class="chat-box">
-    <form id="chatForm">
-      <input type="text" placeholder="Ask anything..." id="userInput" required />
-      <button type="submit">Send</button>
-    </form>
-    <div class="microphone">🎙️</div>
-  </div>  <div class="premium">
+
+  <header>MindPort AI <span style="float:right;">user@example.com</span></header>
+
+  <div class="input-area">
+    <input type="text" id="promptInput" placeholder="Ask anything..." />
+    <button id="sendBtn">Send</button>
+    <button class="mic" onclick="startVoice()">🎤 Talk to AI</button>
+  </div>
+
+  <div class="response" id="ai-response">🤖 AI will reply here...</div>
+
+  <div class="premium-banner">
     <strong>Upgrade to Premium</strong><br>
     Unlock full access for just ZAR 670/month<br>
-    <button class="upgrade-btn">Upgrade</button>
-  </div>  <div class="tip-box" id="dailyTip">
-    💡 Daily AI Tip: Stay consistent — even 30 minutes a day can lead to breakthroughs.
-  </div>  <div class="vip">
+    <button onclick="alert('Redirect to payment')">Upgrade</button>
+  </div>
+
+  <div id="vip">
     <h3>VIP Dashboard</h3>
-    <p>Welcome, premium user! Your features include image generation, coding assistant, and real-time jobs.</p>
-  </div>  <div class="jobs">
+    Welcome, premium user! Your features include image generation, coding assistant, and real-time jobs.
+  </div>
+
+  <div class="job-finder">
     <h3>Real-Time Job Finder</h3>
-    <input type="text" placeholder="Search jobs..." id="jobSearch" />
-    <div class="job-result">🔥 Software Engineer - Remote (ZAR 45k/mo)</div>
-    <div class="job-result">🌍 Data Analyst - Cape Town (ZAR 38k/mo)</div>
-  </div>  <script>
-    document.getElementById("chatForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const input = document.getElementById("userInput").value;
-      alert("AI is thinking about: " + input);
-    });
-  </script></body>
-  </html>
+    <div class="job-card">🔥 Software Engineer – Remote (ZAR 45k/mo)</div>
+    <div class="job-card">🎨 UI/UX Designer – Cape Town (ZAR 35k/mo)</div>
+    <div class="job-card">📊 Data Analyst – Johannesburg (ZAR 42k/mo)</div>
+  </div>
+
+  <script>
+    async function askAI(prompt) {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+      document.getElementById("ai-response").innerText = reply;
+      speakText(reply);
+    }
+
+    document.getElementById("sendBtn").onclick = () => {
+      const prompt = document.getElementById("promptInput").value;
+      askAI(prompt);
+    }
+
+    function startVoice() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.start();
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("promptInput").value = transcript;
+        askAI(transcript);
+      };
+    }
+
+    function speakText(text) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = 'en-US';
+      window.speechSynthesis.speak(speech);
+    }
+  </script>
+
+</body>
+    </html>
