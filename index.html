@@ -3,166 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindPort AI - Your Intelligent Assistant</title>
-  <link rel="icon" href="favicon.png" />
+  <title>MindPort AI</title>
   <style>
     body {
       margin: 0;
+      padding: 1rem;
       font-family: 'Segoe UI', sans-serif;
-      background: #0e0e0e;
+      background-color: #0f1117;
       color: white;
     }
+
     header {
-      background: linear-gradient(to right, #1db954, #0a3d62);
-      padding: 2rem;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #dcdcdc;
-    }
-    .btn {
-      margin-top: 1rem;
-      padding: 0.75rem 2rem;
-      background: #1db954;
-      color: white;
-      border: none;
-      border-radius: 30px;
+      font-size: 2rem;
       font-weight: bold;
+    }
+
+    .input-area {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, button {
+      padding: 1rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 8px;
+    }
+
+    #sendBtn {
+      background: #2563eb;
+      color: white;
       cursor: pointer;
     }
-    .section {
-      padding: 3rem 1rem;
-      max-width: 900px;
-      margin: auto;
+
+    #vip {
+      background: #1e1e2e;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-left: 5px solid #22c55e;
+      border-radius: 8px;
     }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+
+    .job-finder {
       margin-top: 2rem;
     }
-    .feature-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border-left: 4px solid #1db954;
+
+    .job-card {
+      background: #1f2937;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
     }
-    .feature-card h3 {
-      margin-top: 0;
+
+    .mic {
+      margin-top: 0.5rem;
+      background: #4b5563;
     }
-    .pricing {
-      background: #111;
-      padding: 3rem 1rem;
-      text-align: center;
+
+    .response {
+      margin-top: 1rem;
+      background: #111827;
+      padding: 1rem;
+      border-radius: 8px;
     }
-    .price-box {
-      background: #1a1a1a;
-      border: 2px solid #1db954;
-      padding: 2rem;
-      margin: 1rem auto;
-      border-radius: 12px;
-      max-width: 350px;
-    }
-    .price-box h2 {
-      color: #1db954;
-    }
-    .email-form {
-      text-align: center;
+
+    .premium-banner {
       margin-top: 2rem;
-    }
-    .email-form input {
-      padding: 0.8rem;
-      width: 60%;
-      border-radius: 30px;
-      border: none;
-      margin-right: 0.5rem;
-    }
-    .footer {
-      background: #0a0a0a;
-      padding: 2rem;
+      background: #111827;
+      padding: 1rem;
       text-align: center;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-    @media(max-width: 600px) {
-      .email-form input {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
+      border-top: 2px solid #2563eb;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>MindPort AI</h1>
-    <p>Unlock the full power of artificial intelligence in your daily life.</p>
-    <a href="/dashboard.html"><button class="btn">Launch MindPort</button></a>
-  </header>
+  <header>MindPort AI <span style="float:right;">user@example.com</span></header>
 
-  <section class="section">
-    <h2 style="text-align:center;">What Can MindPort Do?</h2>
-    <div class="features">
-      <div class="feature-card">
-        <h3>Ask Anything</h3>
-        <p>Talk to an AI that understands any language, anytime. Text or voice supported.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Generate Images</h3>
-        <p>Create visuals from your imagination instantly with our AI image creator.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Code Assistant</h3>
-        <p>Need help with coding? Our premium Code AI can write, explain or debug code for you.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Job Search</h3>
-        <p>Search and browse unlimited job listings globally — updated in real time.</p>
-      </div>
-      <div class="feature-card">
-        <h3>VIP Dashboard</h3>
-        <p>Access premium tools, tips, and your account — all in one place.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Daily AI Tips</h3>
-        <p>Learn a new trick every day. Tips sent via email and displayed on dashboard.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="pricing">
-    <h2>Upgrade to Premium</h2>
-    <div class="price-box">
-      <h3>MindPort VIP Access</h3>
-      <p>Unlimited access to AI + VIP dashboard</p>
-      <h2>R670 / Month</h2>
-      <button class="btn">Get VIP</button>
-    </div>
-
-    <div class="price-box">
-      <h3>Code AI Unlock</h3>
-      <p>Unlock premium Code AI tool</p>
-      <h2>R1000 (One-time)</h2>
-      <button class="btn">Unlock Now</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 style="text-align:center;">Join Our AI Tribe</h2>
-    <div class="email-form">
-      <input type="email" placeholder="Enter your email to get daily AI tips" />
-      <button class="btn">Subscribe</button>
-    </div>
-  </section>
-
-  <div class="footer">
-    © 2025 MindPort AI — Powered by Ethereal Ink.
+  <div class="input-area">
+    <input type="text" id="promptInput" placeholder="Ask anything..." />
+    <button id="sendBtn">Send</button>
+    <button class="mic" onclick="startVoice()">🎤 Talk to AI</button>
   </div>
 
+  <div class="response" id="ai-response">🤖 AI will reply here...</div>
+
+  <div class="premium-banner">
+    <strong>Upgrade to Premium</strong><br>
+    Unlock full access for just ZAR 670/month<br>
+    <button onclick="alert('Redirect to payment')">Upgrade</button>
+  </div>
+
+  <div id="vip">
+    <h3>VIP Dashboard</h3>
+    Welcome, premium user! Your features include image generation, coding assistant, and real-time jobs.
+  </div>
+
+  <div class="job-finder">
+    <h3>Real-Time Job Finder</h3>
+    <div class="job-card">🔥 Software Engineer – Remote (ZAR 45k/mo)</div>
+    <div class="job-card">🎨 UI/UX Designer – Cape Town (ZAR 35k/mo)</div>
+    <div class="job-card">📊 Data Analyst – Johannesburg (ZAR 42k/mo)</div>
+  </div>
+
+  <script>
+    async function askAI(prompt) {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+      document.getElementById("ai-response").innerText = reply;
+      speakText(reply);
+    }
+
+    document.getElementById("sendBtn").onclick = () => {
+      const prompt = document.getElementById("promptInput").value;
+      askAI(prompt);
+    }
+
+    function startVoice() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.start();
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("promptInput").value = transcript;
+        askAI(transcript);
+      };
+    }
+
+    function speakText(text) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = 'en-US';
+      window.speechSynthesis.speak(speech);
+    }
+  </script>
+
 </body>
-</html>
+      </html>
