@@ -1,20 +1,133 @@
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI by Ethereal Ink | Smart Assistant</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" href="https://etherealinkbytiisetso.com/favicon.ico" type="image/x-icon" />
-
-  <!-- Meta Description -->
-  <meta name="description" content="Explore the AI tools powered by Ethereal Ink. Smart, fast, and custom-built for you." />
-  <meta name="keywords" content="Ethereal Ink, AI, Smart Assistant, Render, Creative Tools, GPT, Ink AI" />
-  <meta name="author" content="Ethereal Ink Team" />
-
-  <!-- Social Media Preview -->
-  <meta property="og:title" content="Ethereal Ink AI" />
-  <meta property="og:description" content="Explore smart AI tools hosted on ai.etherealinkbytiisetso.com." />
-  <meta property="og:image" content="https://etherealinkbytiisetso.com/preview-banner.png" />
-  <meta property="og:url" content="https://ai.etherealinkbytiisetso.com" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>MindPort AI</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f172a;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      padding: 1rem;
+    }
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .email {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .chat-box {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 600px;
+      background-color: #1e293b;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    input, button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+    input {
+      flex-grow: 1;
+      background-color: #334155;
+      color: white;
+    }
+    button {
+      background-color: #3b82f6;
+      color: white;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+    .microphone {
+      background: #0ea5e9;
+      border-radius: 50%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+    }
+    .premium {
+      margin-top: 2rem;
+      background: #1e3a8a;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .upgrade-btn {
+      background: #22c55e;
+      margin-top: 0.5rem;
+    }
+    .tip-box {
+      background: #0f766e;
+      padding: 0.75rem;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .vip, .jobs {
+      margin-top: 2rem;
+      background: #475569;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+    }
+    .vip h3, .jobs h3 {
+      margin-top: 0;
+    }
+    .job-result {
+      margin-top: 1rem;
+      background: #334155;
+      padding: 0.75rem;
+      border-radius: 5px;
+    }
+  </style>
 </head>
+<body>
+  <header>
+    <div class="logo">MindPort AI</div>
+    <div class="email">user@example.com</div>
+  </header>  <div class="chat-box">
+    <form id="chatForm">
+      <input type="text" placeholder="Ask anything..." id="userInput" required />
+      <button type="submit">Send</button>
+    </form>
+    <div class="microphone">🎙️</div>
+  </div>  <div class="premium">
+    <strong>Upgrade to Premium</strong><br>
+    Unlock full access for just ZAR 670/month<br>
+    <button class="upgrade-btn">Upgrade</button>
+  </div>  <div class="tip-box" id="dailyTip">
+    💡 Daily AI Tip: Stay consistent — even 30 minutes a day can lead to breakthroughs.
+  </div>  <div class="vip">
+    <h3>VIP Dashboard</h3>
+    <p>Welcome, premium user! Your features include image generation, coding assistant, and real-time jobs.</p>
+  </div>  <div class="jobs">
+    <h3>Real-Time Job Finder</h3>
+    <input type="text" placeholder="Search jobs..." id="jobSearch" />
+    <div class="job-result">🔥 Software Engineer - Remote (ZAR 45k/mo)</div>
+    <div class="job-result">🌍 Data Analyst - Cape Town (ZAR 38k/mo)</div>
+  </div>  <script>
+    document.getElementById("chatForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const input = document.getElementById("userInput").value;
+      alert("AI is thinking about: " + input);
+    });
+  </script></body>
+  </html>
