@@ -52,7 +52,7 @@
 <body onload="initTimer()">
   <header>
     <h1>MindPort AI</h1>
-    <p>🔓 One-time access for only R200. First 10 mins FREE.</p>
+    <p>🧠 10-min free trial. Unlock lifetime access for R200.</p>
   </header>
 
   <div class="container">
@@ -63,9 +63,9 @@
 
   <div id="lockScreen">
     <h2>⏱️ Trial Expired</h2>
-    <p>Your 10-minute free trial has ended.</p>
-    <p>Unlock unlimited lifetime access for just <b>R200 once-off</b>.</p>
-    <button onclick="redirectToPay()">Unlock Full Access</button>
+    <p>Your free trial has ended.</p>
+    <p>Unlock full lifetime access for <b>R200</b>.</p>
+    <button onclick="redirectToPay()">Pay with Paystack</button>
   </div>
 
   <footer>
@@ -92,7 +92,7 @@
     }
 
     function redirectToPay() {
-      // 🔁 Replace this link with your real Paystack payment link later
+      // Replace this link with your real Paystack link
       window.location.href = "https://paystack.com/pay/mindport200";
     }
 
@@ -114,12 +114,6 @@
       } catch (err) {
         document.getElementById("response").innerHTML = "⚠️ Error contacting AI.";
       }
-    }
-
-    // Optional unlock function to simulate after payment
-    function unlockPro() {
-      localStorage.setItem(paidKey, 'yes');
-      document.getElementById("lockScreen").style.display = 'none';
     }
   </script>
 </body>
