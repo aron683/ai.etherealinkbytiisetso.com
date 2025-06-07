@@ -3,166 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindPort AI - Your Intelligent Assistant</title>
-  <link rel="icon" href="favicon.png" />
+  <title>MindPort AI</title>
+  <link rel="icon" href="favicon.ico" />
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: white;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0e0e0e;
-      color: white;
+      padding: 0;
     }
-    header {
-      background: linear-gradient(to right, #1db954, #0a3d62);
-      padding: 2rem;
+    header, footer {
       text-align: center;
+      padding: 1rem;
+      background: #1f1f1f;
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #dcdcdc;
-    }
-    .btn {
-      margin-top: 1rem;
-      padding: 0.75rem 2rem;
-      background: #1db954;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .section {
-      padding: 3rem 1rem;
-      max-width: 900px;
+    .container {
+      padding: 1rem;
+      max-width: 600px;
       margin: auto;
     }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .feature-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border-left: 4px solid #1db954;
-    }
-    .feature-card h3 {
-      margin-top: 0;
-    }
-    .pricing {
-      background: #111;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .price-box {
-      background: #1a1a1a;
-      border: 2px solid #1db954;
-      padding: 2rem;
-      margin: 1rem auto;
-      border-radius: 12px;
-      max-width: 350px;
-    }
-    .price-box h2 {
-      color: #1db954;
-    }
-    .email-form {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .email-form input {
-      padding: 0.8rem;
-      width: 60%;
-      border-radius: 30px;
+    button {
+      background: #1db954;
       border: none;
-      margin-right: 0.5rem;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .footer {
-      background: #0a0a0a;
-      padding: 2rem;
+    #lockScreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.95);
+      color: white;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-    @media(max-width: 600px) {
-      .email-form input {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
+      z-index: 1000;
+      padding: 2rem;
     }
   </style>
 </head>
-<body>
-
+<body onload="initTimer()">
   <header>
     <h1>MindPort AI</h1>
-    <p>Unlock the full power of artificial intelligence in your daily life.</p>
-    <a href="/dashboard.html"><button class="btn">Launch MindPort</button></a>
+    <p>🔓 One-time access for only R200. First 10 mins FREE.</p>
   </header>
 
-  <section class="section">
-    <h2 style="text-align:center;">What Can MindPort Do?</h2>
-    <div class="features">
-      <div class="feature-card">
-        <h3>Ask Anything</h3>
-        <p>Talk to an AI that understands any language, anytime. Text or voice supported.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Generate Images</h3>
-        <p>Create visuals from your imagination instantly with our AI image creator.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Code Assistant</h3>
-        <p>Need help with coding? Our premium Code AI can write, explain or debug code for you.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Job Search</h3>
-        <p>Search and browse unlimited job listings globally — updated in real time.</p>
-      </div>
-      <div class="feature-card">
-        <h3>VIP Dashboard</h3>
-        <p>Access premium tools, tips, and your account — all in one place.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Daily AI Tips</h3>
-        <p>Learn a new trick every day. Tips sent via email and displayed on dashboard.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="pricing">
-    <h2>Upgrade to Premium</h2>
-    <div class="price-box">
-      <h3>MindPort VIP Access</h3>
-      <p>Unlimited access to AI + VIP dashboard</p>
-      <h2>R670 / Month</h2>
-      <button class="btn">Get VIP</button>
-    </div>
-
-    <div class="price-box">
-      <h3>Code AI Unlock</h3>
-      <p>Unlock premium Code AI tool</p>
-      <h2>R1000 (One-time)</h2>
-      <button class="btn">Unlock Now</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 style="text-align:center;">Join Our AI Tribe</h2>
-    <div class="email-form">
-      <input type="email" placeholder="Enter your email to get daily AI tips" />
-      <button class="btn">Subscribe</button>
-    </div>
-  </section>
-
-  <div class="footer">
-    © 2025 MindPort AI — Powered by Ethereal Ink.
+  <div class="container">
+    <textarea id="userInput" rows="4" style="width:100%;" placeholder="Ask anything..."></textarea><br/>
+    <button onclick="sendToAI()">Ask AI</button>
+    <div id="response" style="margin-top:1rem;"></div>
   </div>
 
+  <div id="lockScreen">
+    <h2>⏱️ Trial Expired</h2>
+    <p>Your 10-minute free trial has ended.</p>
+    <p>Unlock unlimited lifetime access for just <b>R200 once-off</b>.</p>
+    <button onclick="redirectToPay()">Unlock Full Access</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 MindPort AI</p>
+  </footer>
+
+  <script>
+    const trialMinutes = 10;
+    const startKey = 'mindport_start_time';
+    const paidKey = 'mindport_paid_user';
+
+    function initTimer() {
+      if (localStorage.getItem(paidKey)) return;
+
+      let startTime = localStorage.getItem(startKey);
+      if (!startTime) {
+        localStorage.setItem(startKey, Date.now());
+      } else {
+        const diff = (Date.now() - parseInt(startTime)) / 60000;
+        if (diff >= trialMinutes) {
+          document.getElementById("lockScreen").style.display = 'flex';
+        }
+      }
+    }
+
+    function redirectToPay() {
+      // 🔁 Replace this link with your real Paystack payment link later
+      window.location.href = "https://paystack.com/pay/mindport200";
+    }
+
+    async function sendToAI() {
+      const input = document.getElementById("userInput").value.trim();
+      if (!input) return;
+
+      document.getElementById("response").innerHTML = "🤖 Thinking...";
+
+      try {
+        const res = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: input })
+        });
+
+        const data = await res.json();
+        document.getElementById("response").innerHTML = "✅ " + data.reply;
+      } catch (err) {
+        document.getElementById("response").innerHTML = "⚠️ Error contacting AI.";
+      }
+    }
+
+    // Optional unlock function to simulate after payment
+    function unlockPro() {
+      localStorage.setItem(paidKey, 'yes');
+      document.getElementById("lockScreen").style.display = 'none';
+    }
+  </script>
 </body>
 </html>
