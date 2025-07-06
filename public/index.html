@@ -1,91 +1,32 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MindPort AI is your global multilingual AI assistant. Translate, speak, write, and get help in any language. Powered by GPT and Firebase." />
-  <meta name="keywords" content="AI Chatbot, MindPort AI, Multilingual Assistant, OpenAI, Firebase, Voice AI, GPT-4o, Smart Assistant, Language Translator AI" />
-  <meta name="author" content="MindPort AI Team" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MindPort AI - Smart Multilingual Assistant</title>
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <style>
-    body {
-      margin: 0;
-      background-color: #121212;
-      color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-    h1 {
-      color: #00e676;
-    }
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      resize: none;
-      font-size: 16px;
-    }
-    button {
-      margin-top: 12px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #ask-button {
-      background-color: #00c853;
-      color: #fff;
-    }
-    #mic-button {
-      background-color: #6200ea;
-      color: white;
-      margin-left: 5px;
-    }
-    #response {
-      margin-top: 20px;
-      background-color: #2c2c2c;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: left;
-    }
+    body { background: #121212; color: #fff; font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: 40px auto; padding: 20px; background: #1e1e1e; border-radius: 12px; }
+    textarea { width: 100%; padding: 12px; border-radius: 8px; resize: none; font-size: 16px; }
+    button { margin-top: 12px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; }
+    #ask-button { background: #00c853; color: white; }
+    #mic-button { background: #6200ea; color: white; margin-left: 5px; }
+    #response { margin-top: 20px; background: #2c2c2c; padding: 15px; border-radius: 8px; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>MindPort AI</h1>
-    <p id="trial-message">🚀 Free Trial Active</p>
-    <textarea id="user-input" rows="4" placeholder="Ask me anything in any language..."></textarea><br/>
+    <textarea id="user-input" rows="4" placeholder="Ask me anything in any language..."></textarea><br />
     <button id="ask-button" onclick="askAI()">Ask AI</button>
     <button id="mic-button" onclick="startListening()">🎤</button>
     <div id="response"></div>
-  </div>  <script>
-    const trialStart = Date.now();
-    const trialDuration = 5 * 60 * 1000;
+  </div>
+
+  <script>
     const endpoint = "/api/ask";
-    let trialExpired = false;
 
     async function askAI() {
-      const timeLeft = trialDuration - (Date.now() - trialStart);
-      if (timeLeft <= 0) {
-        document.body.innerHTML = `
-          <div class='container'>
-            <h1>MindPort AI</h1>
-            <p>Your free trial has ended 🔒</p>
-            <button onclick="window.location.href='https://paystack.com/pay/mindport'">Unlock Full Access (R200)</button>
-          </div>`;
-        return;
-      }
-
       const prompt = document.getElementById("user-input").value;
       document.getElementById("response").innerText = `🔄 Responding to: "${prompt}"...`;
 
@@ -93,13 +34,12 @@
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt })
+          body: JSON.stringify({ prompt }),
         });
         const data = await res.json();
         document.getElementById("response").innerText = data.reply;
-      } catch (err) {
+      } catch {
         document.getElementById("response").innerText = "⚠️ Something went wrong. Try again later.";
-        console.error(err);
       }
     }
 
@@ -109,25 +49,19 @@
         if (!SpeechRecognition) throw new Error("SpeechRecognition not supported");
 
         const recognition = new SpeechRecognition();
-        recognition.lang = 'auto';
-        recognition.onresult = function (event) {
+        recognition.lang = "auto";
+        recognition.onresult = (event) => {
           document.getElementById("user-input").value = event.results[0][0].transcript;
           askAI();
         };
-        recognition.onerror = function (event) {
+        recognition.onerror = (event) => {
           alert("Mic error: " + event.error);
         };
         recognition.start();
-      } catch (e) {
+      } catch {
         alert("Your browser does not support voice input");
       }
     }
-
-    setInterval(() => {
-      const timeLeft = Math.max(0, trialDuration - (Date.now() - trialStart));
-      const minutes = Math.floor(timeLeft / 60000);
-      const seconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
-      document.getElementById("trial-message").innerText = `🚀 Free Trial: ${minutes}:${seconds} remaining.`;
-    }, 1000);
-  </script></body>
+  </script>
+</body>
 </html>
