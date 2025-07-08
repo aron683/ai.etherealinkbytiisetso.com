@@ -1,7 +1,7 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { Configuration, OpenAIApi } from 'openai';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const { Configuration, OpenAIApi } = require('openai');
 
 dotenv.config();
 
@@ -25,9 +25,10 @@ app.post('/api/ask', async (req, res) => {
 
     res.json({ reply: completion.data.choices[0].message.content });
   } catch (error) {
+    console.error('OpenAI error:', error);
     res.status(500).json({ error: 'AI request failed' });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🔥 MindPort AI backend running on port ${PORT}`));
