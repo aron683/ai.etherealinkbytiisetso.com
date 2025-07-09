@@ -72,7 +72,7 @@
   <script>
     const trialStart = Date.now();
     const trialDuration = 5 * 60 * 1000; // 5 minutes
-    const endpoint = "http://localhost:3000/api/ask"; // <-- backend endpoint
+    const endpoint = "/api/ask"; // auto works on Render + local
 
     async function askAI() {
       const timeLeft = trialDuration - (Date.now() - trialStart);
@@ -137,4 +137,4 @@
     }, 1000);
   </script>
 </body>
-</html>
+      </html>
