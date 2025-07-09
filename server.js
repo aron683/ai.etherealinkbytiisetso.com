@@ -1,32 +1,43 @@
-// Load environment variables
-require('dotenv').config();
-
-// Import required modules
 const express = require('express');
 const path = require('path');
-const app = express();
+require('dotenv').config();
 
-// Define the port to use (default to 3000)
+const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from the public folder (e.g., HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from current directory
+app.use(express.static(path.join(__dirname)));
 
-// Route for homepage
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.use(express.json());
+
+// OpenAI API route (optional, for /ask endpoint)
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+app.post("/ask", async (req, res) => {
+  const prompt = req.body.prompt;
+
+  try {
+    const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt,
+      max_tokens: 100,
+    });
+
+    res.json({ reply: completion.data.choices[0].text.trim() });
+  } catch (err) {
+    res.status(500).json({ error: "Something went wrong with OpenAI" });
+  }
 });
 
-// Sample API endpoint for testing
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'MindPort AI is working properly!' });
+// Fallback: serve index.html for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Log the API Key (for debugging – remove this before production)
-const apiKey = process.env.KEY;
-console.log('🔑 API Key loaded:', apiKey);
-
-// Start the server
 app.listen(port, () => {
-  console.log(`🚀 MindPort AI running at http://localhost:${port}`);
+  console.log(`MindPort AI running on port ${port}`);
 });
