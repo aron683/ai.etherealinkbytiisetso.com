@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ai.etherealinkbytiisetso.com
+    runtime: node
+    repo: https://github.com/aron683/ai.etherealinkbytiisetso.com
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+    region: oregon
+    buildCommand: yarn install
+    startCommand: node server.js
+    domains:
+      - ai.etherealinkbytiisetso.com
+    autoDeployTrigger: commit
+version: "1"
