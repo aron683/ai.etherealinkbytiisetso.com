@@ -260,25 +260,6 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
         
-        .disclaimer {
-            background: #1a1a1a;
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        
-        .risk-warning {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem auto;
-            text-align: center;
-            max-width: 800px;
-            backdrop-filter: blur(10px);
-        }
-        
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -431,14 +412,15 @@
             <h2 style="font-size: 3.5rem; margin-bottom: 2rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">Ready for Financial Freedom?</h2>
             <p style="font-size: 1.5rem; max-width: 700px; margin: 0 auto 3rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3);">Join thousands of successful investors today. Your first R1,500 weekly return is just one click away.</p>
             
-            <div
+            <a href="https://wa.me/27693809397?text=Hi!%20I'm%20interested%20in%20EliteWealth%20Capital%20investment.%20I%20want%20to%20start%20with%20R1,000%20and%20earn%20R1,500%20weekly.%20Please%20guide%20me." 
+               class="cta-button">
                💬 WhatsApp Us Now
-           
+            </a>
         </div>
-    </footer>
+    </section>
 
     <script>
-        // Smooth scrolling
+        // Smooth scrolling only - no confirmation popup
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -446,13 +428,6 @@
                     behavior: 'smooth'
                 });
             });
-        });
-
-        // Add confirmation with stronger warning
-        document.querySelector('.cta-button').addEventListener('click', function(e) {
-            if(!confirm('🚨 CYBERSECURITY AWARENESS DEMONSTRATION\n\nThis shows how investment scams lure victims.\n\n⚠️ NO REAL INVESTMENT EXISTS\n⚠️ THIS IS FICTIONAL\n⚠️ FOR EDUCATIONAL USE ONLY\n\nClick OK to continue the demonstration.')) {
-                e.preventDefault();
-            }
         });
 
         // Animate numbers counting up
@@ -488,4 +463,4 @@
         observer.observe(document.querySelector('.stats'));
     </script>
 </body>
-</html>
+    </html>
