@@ -1,140 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindPort AI - Smart Multilingual Assistant</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #121212;
-      color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-    h1 {
-      color: #00e676;
-    }
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      resize: none;
-      font-size: 16px;
-    }
-    button {
-      margin-top: 12px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #ask-button {
-      background-color: #00c853;
-      color: #fff;
-    }
-    #mic-button {
-      background-color: #6200ea;
-      color: white;
-      margin-left: 5px;
-    }
-    #response {
-      margin-top: 20px;
-      background-color: #2c2c2c;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: left;
-      min-height: 100px;
-      white-space: pre-wrap;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteWealth Capital | High-Yield Investments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #0c2461;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: "💎";
+            margin-right: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(12, 36, 97, 0.9), rgba(30, 55, 153, 0.9)), url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 15rem 2rem 8rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .section-dark {
+            background: #f8f9fa;
+        }
+        
+        .returns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .return-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .return-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #ff9a00, #ff5e00);
+        }
+        
+        .return-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: #0c2461;
+        }
+        
+        .return-card.featured {
+            border-color: #ff9a00;
+            transform: scale(1.05);
+        }
+        
+        .return-card.featured::before {
+            background: linear-gradient(135deg, #ff9a00, #ff5e00, #ff0000);
+            height: 8px;
+        }
+        
+        .return-card h3 {
+            color: #0c2461;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .return-card .amount {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #27ae60;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .return-card .profit {
+            font-size: 2rem;
+            color: #e74c3c;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        
+        .return-card .weekly {
+            background: #27ae60;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: """;
+            font-size: 8rem;
+            color: #0c2461;
+            opacity: 0.1;
+            position: absolute;
+            top: -2rem;
+            left: 1rem;
+            font-family: serif;
+        }
+        
+        .testimonial img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid #0c2461;
+        }
+        
+        .office-section {
+            background: linear-gradient(135deg, #0c2461, #1e3799);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .office-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #ff9a00, #ff5e00);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            opacity: 0.1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #ff5e00;
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .disclaimer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .risk-warning {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem auto;
+            text-align: center;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>MindPort AI</h1>
-    <p id="trial-message">🚀 Free Trial Active</p>
-    <textarea id="user-input" rows="4" placeholder="Ask me anything in any language..."></textarea><br/>
-    <button id="ask-button" onclick="askAI()">Ask AI</button>
-    <button id="mic-button" onclick="startListening()">🎤</button>
-    <div id="response"></div>
-  </div>  
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">EliteWealth Capital</div>
+            <nav>
+                <a href="#returns" style="margin-right: 2rem; text-decoration: none; color: #333; font-weight: 500;">Investment Plans</a>
+                <a href="#testimonials" style="margin-right: 2rem; text-decoration: none; color: #333; font-weight: 500;">Success Stories</a>
+                <a href="#office" style="margin-right: 2rem; text-decoration: none; color: #333; font-weight: 500;">Our Office</a>
+                <a href="#apply" style="text-decoration: none; color: #333; font-weight: 500;">Apply Now</a>
+            </nav>
+        </div>
+    </header>
 
-  <script>
-    const trialStart = Date.now();
-    const trialDuration = 5 * 60 * 1000; // 5 minutes
-    const endpoint = "/api/ask"; // auto works on Render + local
+    <section class="hero">
+        <h1>Earn R1,500+ Weekly From R1,000</h1>
+        <p>Join South Africa's most exclusive investment platform. 5,247+ investors already achieving financial freedom with our proven high-yield strategies.</p>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">R 284M+</div>
+                <div>Total Returns Paid</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5,247+</div>
+                <div>Active Investors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98.7%</div>
+                <div>Success Rate</div>
+            </div>
+        </div>
+        
+        <a href="#apply" class="cta-button">🚀 Start Earning Today</a>
+    </section>
 
-    async function askAI() {
-      const timeLeft = trialDuration - (Date.now() - trialStart);
-      if (timeLeft <= 0) {
-        document.body.innerHTML = `
-          <div class='container'>
-            <h1>MindPort AI</h1>
-            <p>Your free trial has ended 🔒</p>
-            <button onclick="window.location.href='https://paystack.com/pay/mindport'">Unlock Full Access (R200)</button>
-          </div>`;
-        return;
-      }
+    <section id="returns" class="section section-dark">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: #0c2461; font-size: 3rem;">Weekly Investment Plans</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.3rem; color: #666;">Choose your path to financial freedom</p>
+            
+            <div class="returns-grid">
+                <div class="return-card">
+                    <h3>STARTER</h3>
+                    <span class="amount">R 1,000</span>
+                    <span class="profit">+ R 1,500 Weekly</span>
+                    <div class="weekly">150% RETURN</div>
+                    <p>Perfect for beginners</p>
+                    <p>7-day cycle</p>
+                    <p>Instant withdrawals</p>
+                </div>
+                
+                <div class="return-card">
+                    <h3>PROFESSIONAL</h3>
+                    <span class="amount">R 5,000</span>
+                    <span class="profit">+ R 8,500 Weekly</span>
+                    <div class="weekly">170% RETURN</div>
+                    <p>Advanced portfolio</p>
+                    <p>5-day cycle</p>
+                    <p>Priority support</p>
+                </div>
+                
+                <div class="return-card featured">
+                    <h3>ELITE</h3>
+                    <span class="amount">R 25,000</span>
+                    <span class="profit">+ R 50,000 Weekly</span>
+                    <div class="weekly">200% RETURN</div>
+                    <p>Most popular choice</p>
+                    <p>3-day cycle</p>
+                    <p>VIP management</p>
+                </div>
+                
+                <div class="return-card">
+                    <h3>PREMIUM</h3>
+                    <span class="amount">R 100,000</span>
+                    <span class="profit">+ R 250,000 Weekly</span>
+                    <div class="weekly">250% RETURN</div>
+                    <p>Exclusive opportunities</p>
+                    <p>2-day cycle</p>
+                    <p>Dedicated advisor</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      const prompt = document.getElementById("user-input").value.trim();
-      if (!prompt) {
-        alert("Please type something to ask!");
-        return;
-      }
-      document.getElementById("response").innerText = `🔄 Responding to: "${prompt}"...`;
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: #0c2461; font-size: 3rem;">Real Success Stories</h2>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah M">
+                    <h4>Sarah M., Johannesburg</h4>
+                    <p>"Started with R1,000 and now earning R1,500 weekly. In 3 months I've made R18,000 from just R1,000! This platform changed my life completely."</p>
+                    <div style="color: #27ae60; font-weight: bold; margin-top: 1rem;">✓ Verified: R18,000 Profit</div>
+                </div>
+                
+                <div class="testimonial">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="David K">
+                    <h4>David K., Cape Town</h4>
+                    <p>"I invested R25,000 and now get R50,000 every week. That's R200,000 monthly! I quit my job and now focus on growing my investments full-time."</p>
+                    <div style="color: #27ae60; font-weight: bold; margin-top: 1rem;">✓ Verified: R800,000 Profit</div>
+                </div>
+                
+                <div class="testimonial">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Priya N">
+                    <h4>Priya N., Durban</h4>
+                    <p>"From teacher to millionaire in 6 months! My R100,000 investment now brings R250,000 weekly. I've bought my dream house and car cash."</p>
+                    <div style="color: #27ae60; font-weight: bold; margin-top: 1rem;">✓ Verified: R5.2M Profit</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      try {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt })
+    <section id="office" class="office-section">
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 3rem;">Visit Our Cape Town Office</h2>
+            
+            <div class="office-card">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">🏢 EliteWealth Capital HQ</h3>
+                <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">The Towers, 25th Floor</p>
+                <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">77 Bree Street</p>
+                <p style="font-size: 1.3rem; margin-bottom: 2rem;">Cape Town City Centre, 8001</p>
+                <p style="font-size: 1.1rem; opacity: 0.9;">Mon-Fri: 8:00 AM - 6:00 PM</p>
+                <p style="font-size: 1.1rem; opacity: 0.9;">Sat: 9:00 AM - 1:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 3.5rem; margin-bottom: 2rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">Ready for Financial Freedom?</h2>
+            <p style="font-size: 1.5rem; max-width: 700px; margin: 0 auto 3rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3);">Join thousands of successful investors today. Your first R1,500 weekly return is just one click away.</p>
+            
+            <div class="risk-warning">
+                ⚠️ <strong>IMPORTANT: Educational Demonstration Only</strong><br>
+                This is a cybersecurity awareness demonstration showing how investment scams operate.
+                No real investment services are offered. Never send money based on online promises.
+            </div>
+            
+            <a href="https://wa.me/27693809397?text=Hi!%20I'm%20interested%20in%20EliteWealth%20Capital%20investment.%20I%20want%20to%20start%20with%20R1,000%20and%20earn%20R1,500%20weekly.%20Please%20guide%20me." 
+               class="cta-button"
+               onclick="return confirm('⚠️ EDUCATIONAL PURPOSE ONLY\n\nThis is a demonstration of how investment scams work.\n\nNO REAL INVESTMENT EXISTS!\n\nClick OK to continue to WhatsApp for educational purposes.')">
+               💬 WhatsApp Us Now
+            </a>
+        </div>
+    </section>
+
+    <footer class="disclaimer">
+        <div class="container">
+            <p><strong>⚠️ CYBERSECURITY EDUCATION DEMONSTRATION</strong></p>
+            <p>This webpage is created purely for educational purposes to demonstrate common tactics used in investment scams.</p>
+            <p>EliteWealth Capital is a fictional company. No real investments are being offered.</p>
+            <p>Always verify investment opportunities through official channels and licensed financial advisors.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
-        if (!res.ok) throw new Error("Network response not ok");
 
-        const data = await res.json();
-        document.getElementById("response").innerText = data.reply || "🤖 No reply received.";
-      } catch (err) {
-        document.getElementById("response").innerText = "⚠️ Something went wrong. Try again later.";
-        console.error(err);
-      }
-    }
+        // Add confirmation with stronger warning
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            if(!confirm('🚨 CYBERSECURITY AWARENESS DEMONSTRATION\n\nThis shows how investment scams lure victims.\n\n⚠️ NO REAL INVESTMENT EXISTS\n⚠️ THIS IS FICTIONAL\n⚠️ FOR EDUCATIONAL USE ONLY\n\nClick OK to continue the demonstration.')) {
+                e.preventDefault();
+            }
+        });
 
-    function startListening() {
-      try {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRecognition) throw new Error("SpeechRecognition not supported");
+        // Animate numbers counting up
+        function animateNumbers() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/[^\d]/g, ''));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = stat.textContent.replace(/\d+/, Math.floor(current).toLocaleString());
+                }, 16);
+            });
+        }
 
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'auto';
-        recognition.onresult = function (event) {
-          document.getElementById("user-input").value = event.results[0][0].transcript;
-          askAI();
-        };
-        recognition.onerror = function (event) {
-          alert("Mic error: " + event.error);
-        };
-        recognition.start();
-      } catch (e) {
-        alert("Your browser does not support voice input");
-      }
-    }
+        // Trigger animation when stats are in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNumbers();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
 
-    setInterval(() => {
-      const timeLeft = Math.max(0, trialDuration - (Date.now() - trialStart));
-      const minutes = Math.floor(timeLeft / 60000);
-      const seconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
-      document.getElementById("trial-message").innerText = `🚀 Free Trial: ${minutes}:${seconds} remaining.`;
-    }, 1000);
-  </script>
+        observer.observe(document.querySelector('.stats'));
+    </script>
 </body>
-      </html>
+</html>
